@@ -1,19 +1,37 @@
 //class EvaDOMBuilderUtil
 export class EvaDOMBuilderUtil {
+    //consecutive num for child node
+    private parentNodeConsecutiveNum: number;
+    
+    //consecutive num for child node
+    private childNodeConsecutiveNum: number;
+
+    //dom nodes
     static parentNode: HTMLElement;
     static childNode: HTMLElement;
+    static prevParentNode: HTMLElement;
+    static prevChildNode: HTMLElement;
+
+    //refs 
+    static parentNodeTempRef: HTMLElement;
+    static childNodeTempRef: HTMLElement;
 
     //dom builder parent
     public DOMBuilderParent(
         nodeType: keyof HTMLElementTagNameMap, 
         attributeType: string, 
         attributeName: string, 
-        appendToRootNode: Node
+        appendToNode: Node,
+        //repeatCount: number,
+        //addConsecutiveNumber: boolean
         ) {
         EvaDOMBuilderUtil.parentNode = document.createElement(nodeType);
         EvaDOMBuilderUtil.parentNode.setAttribute(attributeType, attributeName);    
 
-        appendToRootNode.appendChild(EvaDOMBuilderUtil.parentNode);
+        //set prevParentNode to current parentNode for reference later
+        EvaDOMBuilderUtil.prevParentNode = EvaDOMBuilderUtil.parentNode;
+
+        appendToNode.appendChild(EvaDOMBuilderUtil.parentNode);
     }
 
     //dom builder child
@@ -21,26 +39,212 @@ export class EvaDOMBuilderUtil {
         nodeType: keyof HTMLElementTagNameMap, 
         attributeType: string, 
         attributeName: string, 
-        setTextContent: string | undefined, 
-        setInnerHTML: string | undefined
+        //setTextContent: string | undefined, 
+        setInnerHTML: string | undefined,
+        appendToNode: Node,
+        repeatCount: number,
+        addConsectiveNumber: boolean,
         ) {
-        EvaDOMBuilderUtil.childNode = document.createElement(nodeType);
-        EvaDOMBuilderUtil.childNode.setAttribute(attributeType, attributeName);
 
-        //check setTextContent argument
-        if(setTextContent) {
-            EvaDOMBuilderUtil.childNode.textContent = setTextContent;
-            EvaDOMBuilderUtil.parentNode.appendChild(EvaDOMBuilderUtil.childNode);
-        } else if(setTextContent === undefined) {
-            EvaDOMBuilderUtil.parentNode.appendChild(EvaDOMBuilderUtil.childNode); 
+        //assign childNOdeConsecutiveNum 
+        this.childNodeConsecutiveNum = 0;
+
+        for(let i = this.childNodeConsecutiveNum; i < repeatCount; i++) {
+            console.log(this.childNodeConsecutiveNum++);
+            
+            if(addConsectiveNumber == false) {
+                EvaDOMBuilderUtil.childNode = document.createElement(nodeType);
+                EvaDOMBuilderUtil.childNode.setAttribute(attributeType, attributeName);
+    
+                //set prevChildNode to current childNode for reference later
+                EvaDOMBuilderUtil.prevChildNode = EvaDOMBuilderUtil.childNode;
+    
+                //check setInnerHTML argument
+                if(setInnerHTML) {
+                    EvaDOMBuilderUtil.childNode.innerHTML = setInnerHTML;
+                    appendToNode.appendChild(EvaDOMBuilderUtil.childNode);
+                } else if(setInnerHTML === undefined) {
+                    appendToNode.appendChild(EvaDOMBuilderUtil.childNode);            
+                }
+            } else if(addConsectiveNumber === true) {
+                EvaDOMBuilderUtil.childNode = document.createElement(nodeType);
+                EvaDOMBuilderUtil.childNode.setAttribute(attributeType, attributeName);
+    
+                //set prevChildNode to current childNode for reference later
+                EvaDOMBuilderUtil.prevChildNode = EvaDOMBuilderUtil.childNode;
+    
+                //check setTextContent argument
+                /*
+                if(setTextContent) {
+                    EvaDOMBuilderUtil.childNode.textContent = setTextContent;
+                    appendTo.appendChild(EvaDOMBuilderUtil.childNode);
+                } else if(setTextContent === undefined) {
+                    appendTo.appendChild(EvaDOMBuilderUtil.childNode); 
+                }
+                */
+    
+                //check setInnerHTML argument
+                if(setInnerHTML) {
+                    EvaDOMBuilderUtil.childNode.innerHTML = setInnerHTML + this.childNodeConsecutiveNum;
+                    appendToNode.appendChild(EvaDOMBuilderUtil.childNode);
+                } else if(setInnerHTML === undefined) {
+                    appendToNode.appendChild(EvaDOMBuilderUtil.childNode);            
+                }
+            }
         }
+    }
 
-        //check setInnerHTML argument
-        if(setInnerHTML) {
-            EvaDOMBuilderUtil.childNode.innerHTML = setInnerHTML;
-            EvaDOMBuilderUtil.parentNode.appendChild(EvaDOMBuilderUtil.childNode);
-        } else if(setInnerHTML === undefined) {
-            EvaDOMBuilderUtil.parentNode.appendChild(EvaDOMBuilderUtil.childNode);            
+    //dom builder child no attributes
+    public DOMBuilderChildNoAttr(        
+        nodeType: keyof HTMLElementTagNameMap, 
+        setInnerHTML: string | undefined,
+        appendToNode: Node,
+        repeatCount: number,
+        addConsectiveNumber: boolean
+        ) {
+
+        //assign childNOdeConsecutiveNum 
+        this.childNodeConsecutiveNum = 0;
+
+        for(let i = this.childNodeConsecutiveNum; i < repeatCount; i++) {
+            console.log(this.childNodeConsecutiveNum++);
+            
+            if(addConsectiveNumber == false) {
+                EvaDOMBuilderUtil.childNode = document.createElement(nodeType);
+    
+                //set prevChildNode to current childNode for reference later
+                EvaDOMBuilderUtil.prevChildNode = EvaDOMBuilderUtil.childNode;
+    
+                //check setInnerHTML argument
+                if(setInnerHTML) {
+                    EvaDOMBuilderUtil.childNode.innerHTML = setInnerHTML;
+                    appendToNode.appendChild(EvaDOMBuilderUtil.childNode);
+                } else if(setInnerHTML === undefined) {
+                    appendToNode.appendChild(EvaDOMBuilderUtil.childNode);            
+                }
+            } else if(addConsectiveNumber === true) {
+                EvaDOMBuilderUtil.childNode = document.createElement(nodeType);
+    
+                //set prevChildNode to current childNode for reference later
+                EvaDOMBuilderUtil.prevChildNode = EvaDOMBuilderUtil.childNode;
+    
+                //check setInnerHTML argument
+                if(setInnerHTML) {
+                    EvaDOMBuilderUtil.childNode.innerHTML = setInnerHTML + this.childNodeConsecutiveNum;
+                    appendToNode.appendChild(EvaDOMBuilderUtil.childNode);
+                } else if(setInnerHTML === undefined) {
+                    appendToNode.appendChild(EvaDOMBuilderUtil.childNode);            
+                }
+            }
+        }
+    }
+
+    //dom builder child with reference
+    public DOMBuilderChildWithRef(
+        nodeType: keyof HTMLElementTagNameMap, 
+        attributeType: string, 
+        attributeName: string, 
+        //setTextContent: string | undefined, 
+        setInnerHTML: string | undefined,
+        appendToNode: Node,
+        repeatCount: number,
+        addConsectiveNumber: boolean,
+        tempRef: boolean
+        ) {
+
+        //assign childNOdeConsecutiveNum 
+        this.childNodeConsecutiveNum = 0;
+
+        for(let i = this.childNodeConsecutiveNum; i < repeatCount; i++) {
+            console.log(this.childNodeConsecutiveNum++);
+            
+            if(addConsectiveNumber == false && tempRef === true) {
+                EvaDOMBuilderUtil.childNode = document.createElement(nodeType);
+                EvaDOMBuilderUtil.childNode.setAttribute(attributeType, attributeName);
+    
+                //set prevChildNode to current childNode for reference later
+                EvaDOMBuilderUtil.prevChildNode = EvaDOMBuilderUtil.childNode;
+    
+                //temp ref child
+                EvaDOMBuilderUtil.childNodeTempRef = EvaDOMBuilderUtil.childNode;
+
+                //check setInnerHTML argument
+                if(setInnerHTML) {
+                    EvaDOMBuilderUtil.childNode.innerHTML = setInnerHTML;
+                    appendToNode.appendChild(EvaDOMBuilderUtil.childNode);
+                } else if(setInnerHTML === undefined) {
+                    appendToNode.appendChild(EvaDOMBuilderUtil.childNode);            
+                }
+            } else if(addConsectiveNumber === true) {
+                EvaDOMBuilderUtil.childNode = document.createElement(nodeType);
+                EvaDOMBuilderUtil.childNode.setAttribute(attributeType, attributeName);
+    
+                //set prevChildNode to current childNode for reference later
+                EvaDOMBuilderUtil.prevChildNode = EvaDOMBuilderUtil.childNode;
+    
+                //check setInnerHTML argument
+                if(setInnerHTML) {
+                    EvaDOMBuilderUtil.childNode.innerHTML = setInnerHTML + this.childNodeConsecutiveNum;
+                    appendToNode.appendChild(EvaDOMBuilderUtil.childNode);
+                } else if(setInnerHTML === undefined) {
+                    appendToNode.appendChild(EvaDOMBuilderUtil.childNode);            
+                }
+            }
+        }
+    }
+
+    //dom builder child with reference and no attributes
+    public DOMBuilderChildWithRefNoAttr(
+        nodeType: keyof HTMLElementTagNameMap, 
+        //setTextContent: string | undefined, 
+        setInnerHTML: string | undefined,
+        appendToNode: Node,
+        repeatCount: number,
+        addConsectiveNumber: boolean,
+        tempRef: boolean
+        ) {
+
+        //assign childNOdeConsecutiveNum 
+        this.childNodeConsecutiveNum = 0;
+
+        for(let i = this.childNodeConsecutiveNum; i < repeatCount; i++) {
+            console.log(this.childNodeConsecutiveNum++);
+                    
+            if(addConsectiveNumber == false && tempRef === true) {
+                EvaDOMBuilderUtil.childNode = document.createElement(nodeType);
+            
+                //set prevChildNode to current childNode for reference later
+                EvaDOMBuilderUtil.prevChildNode = EvaDOMBuilderUtil.childNode;
+                
+                //temp ref child
+                EvaDOMBuilderUtil.childNodeTempRef = EvaDOMBuilderUtil.childNode;
+
+                console.log(EvaDOMBuilderUtil.childNodeTempRef);
+
+            //check setInnerHTML argument
+             if(setInnerHTML) {
+                EvaDOMBuilderUtil.childNode.innerHTML = setInnerHTML;
+                appendToNode.appendChild(EvaDOMBuilderUtil.childNode);
+            } else if(setInnerHTML === undefined) {
+                    appendToNode.appendChild(EvaDOMBuilderUtil.childNode);            
+                }
+            } else if(addConsectiveNumber === true) {
+                EvaDOMBuilderUtil.childNode = document.createElement(nodeType);
+            
+                //set prevChildNode to current childNode for reference later
+                EvaDOMBuilderUtil.prevChildNode = EvaDOMBuilderUtil.childNode;
+
+                //temp ref child
+                //EvaDOMBuilderUtil.childNodeTempRef = EvaDOMBuilderUtil.childNode;
+
+                //check setInnerHTML argument
+                if(setInnerHTML) {
+                    EvaDOMBuilderUtil.childNode.innerHTML = setInnerHTML + this.childNodeConsecutiveNum;
+                    appendToNode.appendChild(EvaDOMBuilderUtil.childNode);
+                } else if(setInnerHTML === undefined) {
+                    appendToNode.appendChild(EvaDOMBuilderUtil.childNode);            
+                }
+            }
         }
     }
 }
