@@ -1,0 +1,23 @@
+{
+  "name": "eva-dom-builder-util",
+  "version": "1.0.0",
+  "description": "A DOM builder utility",
+  "main": "src/eva-dom-builder-util.js",
+  "typings": "src/eva-dom-builder-util",
+  "scripts": {
+    "build": "tsc --build --clean && tsc --build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexwkleung/Eva-DOM-Builder-Util.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexwkleung/Eva-DOM-Builder-Util/issues"
+  },
+  "homepage": "https://github.com/alexwkleung/Eva-DOM-Builder-Util#readme",
+  "devDependencies": {
+    "typescript": "^4.9.4"
+  }
+}
