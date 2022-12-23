@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eva DOM Builder Util</title>
+</head>
+<body> 
+    <style>
+    ul, #myUL {
+        list-style-type: none;
+    }
+
+    #myUL {
+        margin: 0;
+        padding: 0;
+    }
+
+    .caret {
+        cursor: pointer;
+        -webkit-user-select: none; /* Safari 3.1+ */
+        user-select: none;
+    }
+
+    .caret::before {
+        content: "\25B6";
+        color: black;
+        display: inline-block;
+        margin-right: 6px;
+    }
+
+    .caret-down::before {
+        -ms-transform: rotate(90deg); /* IE 9 */
+        -webkit-transform: rotate(90deg); /* Safari */
+        transform: rotate(90deg);  
+    }
+
+    .nested {
+        display: none;
+    }
+
+    .active {
+        display: block;
+        margin-left: -20px;
+    }
+    </style>
+
+  <script type="module" src="../dist/test/evadom_test.js"></script>
+</body>
+</html>
