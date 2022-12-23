@@ -4,6 +4,7 @@
   "description": "A DOM builder utility",
   "main": "src/eva-dom-builder-util.js",
   "typings": "src/eva-dom-builder-util",
+  "type": "module",
   "scripts": {
     "build": "tsc --build --clean && tsc --build"
   },
