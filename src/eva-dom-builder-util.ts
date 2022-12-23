@@ -13,8 +13,8 @@ export class EvaDOMBuilderUtil {
     static prevChildNode: HTMLElement;
 
     //refs 
-    static parentNodeTempRef: HTMLElement;
-    static childNodeTempRef: HTMLElement;
+    static parentNodeTempRef: Node;
+    static childNodeTempRef: Node;
 
     //dom builder parent
     public DOMBuilderParent(
@@ -30,7 +30,7 @@ export class EvaDOMBuilderUtil {
 
         //set prevParentNode to current parentNode for reference later
         EvaDOMBuilderUtil.prevParentNode = EvaDOMBuilderUtil.parentNode;
-
+        
         appendToNode.appendChild(EvaDOMBuilderUtil.parentNode);
     }
 
