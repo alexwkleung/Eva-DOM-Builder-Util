@@ -15,7 +15,7 @@ function Eva() {
     EvaDOM.DOMBuilderChild(
         'ul', 
         'class', 
-        "myUL",  
+        "someUl",  
         undefined,
         EvaDOMBuilderUtil.parentNode,
         1,

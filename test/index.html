@@ -8,42 +8,41 @@
 </head>
 <body> 
     <style>
-    ul, #myUL {
-        list-style-type: none;
-    }
+        ul, #someUl {
+            list-style-type: none;
+        }
 
-    #myUL {
-        margin: 0;
-        padding: 0;
-    }
+        #someUl {
+            margin: 0;
+            padding: 0;
+        }
 
-    .caret {
-        cursor: pointer;
-        -webkit-user-select: none; /* Safari 3.1+ */
-        user-select: none;
-    }
+        .caret {
+            cursor: pointer;
+            -webkit-user-select: none;
+            user-select: none;
+        }
 
-    .caret::before {
-        content: "\25B6";
-        color: black;
-        display: inline-block;
-        margin-right: 6px;
-    }
+        .caret::before {
+            content: "\25B6";
+            color: black;
+            display: inline-block;
+            margin-right: 6px;
+        }
 
-    .caret-down::before {
-        -ms-transform: rotate(90deg); /* IE 9 */
-        -webkit-transform: rotate(90deg); /* Safari */
-        transform: rotate(90deg);  
-    }
+        .caret-down::before {
+            -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);  
+        }
 
-    .nested {
-        display: none;
-    }
+        .nested {
+            display: none;
+        }
 
-    .active {
-        display: block;
-        margin-left: -20px;
-    }
+        .active {
+            display: block;
+            margin-left: -20px;
+        }
     </style>
 
   <script type="module" src="../dist/test/evadom_test.js"></script>
