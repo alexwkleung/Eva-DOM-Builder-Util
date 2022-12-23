@@ -1,9 +1,7 @@
 //class EvaDOMBuilderUtil
 export class EvaDOMBuilderUtil {
-    //consecutive num for child node
+    //consecutive nums
     private parentNodeConsecutiveNum: number;
-    
-    //consecutive num for child node
     private childNodeConsecutiveNum: number;
 
     //dom nodes
