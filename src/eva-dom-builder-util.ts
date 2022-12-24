@@ -137,6 +137,32 @@ export class EvaDOMBuilderUtil {
         }
     }
 
+    //dom builder child with string array
+    public DOMBuilderChildWithStringArray(        
+        nodeType: keyof HTMLElementTagNameMap, 
+        appendToNode: Node,
+        stringArray: string[]
+        ) {    
+        //EvaDOMBuilderUtil.childNode = document.createElement(nodeType);
+
+        //check stringArray argument
+        if(stringArray) {
+            stringArray.forEach((elements) => {
+                console.log(elements);
+                
+                EvaDOMBuilderUtil.childNode = document.createElement(nodeType);
+
+                //set prevChildNode to current childNode for reference later
+                EvaDOMBuilderUtil.prevChildNode = EvaDOMBuilderUtil.childNode;
+
+                //set childNode innerHTML to iterated elements
+                EvaDOMBuilderUtil.childNode.innerHTML = elements;
+
+                appendToNode.appendChild(EvaDOMBuilderUtil.childNode);
+            });
+        }
+    }
+
     //dom builder child with reference
     public DOMBuilderChildWithRef(
         nodeType: keyof HTMLElementTagNameMap, 

@@ -51,13 +51,11 @@ function Eva() {
         true
     )
 
-    EvaDOM.DOMBuilderChildNoAttr(
+    EvaDOM.DOMBuilderChildWithStringArray(
         'li',
-        "User",
         EvaDOMBuilderUtil.prevChildNode,
-        2,
-        true
-    );
+        ["one", "two", "three"]
+    )
 
     const toggle = document.getElementsByClassName("caret");
     
