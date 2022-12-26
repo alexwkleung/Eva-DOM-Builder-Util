@@ -56,7 +56,17 @@ function Eva() {
         'class',
         "numbers",
         EvaDOMBuilderUtil.prevChildNode,
-        ["one", "two", "three"]
+        ["one", "two", "three"],
+        false
+    )
+
+    EvaDOM.DOMBuilderChildWithStringArray(
+        'li',
+        'class',
+        "numbersRef",
+        EvaDOMBuilderUtil.prevChildNode,
+        ["one", "two", "three"],
+        false
     )
 
     const toggle = document.getElementsByClassName("caret");

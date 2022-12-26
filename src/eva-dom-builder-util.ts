@@ -143,7 +143,8 @@ export class EvaDOMBuilderUtil {
         attributeType: string, 
         attributeName: string, 
         appendToNode: Node,
-        stringArray: string[]
+        stringArray: string[],
+        addRef: boolean
         ) {    
         //EvaDOMBuilderUtil.childNode = document.createElement(nodeType);
 
@@ -154,9 +155,14 @@ export class EvaDOMBuilderUtil {
                 
                 EvaDOMBuilderUtil.childNode = document.createElement(nodeType);
                 EvaDOMBuilderUtil.childNode.setAttribute(attributeType, attributeName);
-                
-                //set prevChildNode to current childNode for reference later
-                EvaDOMBuilderUtil.prevChildNode = EvaDOMBuilderUtil.childNode;
+
+                //check ref argument
+                if(addRef === true) {
+                    //set prevChildNode to current childNode for reference later
+                    EvaDOMBuilderUtil.prevChildNode = EvaDOMBuilderUtil.childNode;
+                } else if(addRef === false) {
+                    EvaDOMBuilderUtil.prevChildNode;
+                }
 
                 //set childNode innerHTML to iterated elements
                 EvaDOMBuilderUtil.childNode.innerHTML = elements;
