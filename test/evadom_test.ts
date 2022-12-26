@@ -53,6 +53,8 @@ function Eva() {
 
     EvaDOM.DOMBuilderChildWithStringArray(
         'li',
+        'class',
+        "numbers",
         EvaDOMBuilderUtil.prevChildNode,
         ["one", "two", "three"]
     )

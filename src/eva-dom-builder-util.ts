@@ -140,6 +140,8 @@ export class EvaDOMBuilderUtil {
     //dom builder child with string array
     public DOMBuilderChildWithStringArray(        
         nodeType: keyof HTMLElementTagNameMap, 
+        attributeType: string, 
+        attributeName: string, 
         appendToNode: Node,
         stringArray: string[]
         ) {    
@@ -151,7 +153,8 @@ export class EvaDOMBuilderUtil {
                 console.log(elements);
                 
                 EvaDOMBuilderUtil.childNode = document.createElement(nodeType);
-
+                EvaDOMBuilderUtil.childNode.setAttribute(attributeType, attributeName);
+                
                 //set prevChildNode to current childNode for reference later
                 EvaDOMBuilderUtil.prevChildNode = EvaDOMBuilderUtil.childNode;
 
