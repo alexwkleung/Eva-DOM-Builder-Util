@@ -20,8 +20,6 @@ export class EvaDOMBuilderUtil {
         attributeType: string, 
         attributeName: string, 
         appendToNode: Node,
-        //repeatCount: number,
-        //addConsecutiveNumber: boolean
         ) {
         EvaDOMBuilderUtil.parentNode = document.createElement(nodeType);
         EvaDOMBuilderUtil.parentNode.setAttribute(attributeType, attributeName);    
@@ -37,7 +35,6 @@ export class EvaDOMBuilderUtil {
         nodeType: keyof HTMLElementTagNameMap, 
         attributeType: string, 
         attributeName: string, 
-        //setTextContent: string | undefined, 
         setInnerHTML: string | undefined,
         appendToNode: Node,
         repeatCount: number,
@@ -48,8 +45,6 @@ export class EvaDOMBuilderUtil {
         this.childNodeConsecutiveNum = 0;
 
         for(let i = this.childNodeConsecutiveNum; i < repeatCount; i++) {
-            console.log(this.childNodeConsecutiveNum++);
-            
             if(addConsectiveNumber == false) {
                 EvaDOMBuilderUtil.childNode = document.createElement(nodeType);
                 EvaDOMBuilderUtil.childNode.setAttribute(attributeType, attributeName);
@@ -70,16 +65,6 @@ export class EvaDOMBuilderUtil {
     
                 //set prevChildNode to current childNode for reference later
                 EvaDOMBuilderUtil.prevChildNode = EvaDOMBuilderUtil.childNode;
-    
-                //check setTextContent argument
-                /*
-                if(setTextContent) {
-                    EvaDOMBuilderUtil.childNode.textContent = setTextContent;
-                    appendTo.appendChild(EvaDOMBuilderUtil.childNode);
-                } else if(setTextContent === undefined) {
-                    appendTo.appendChild(EvaDOMBuilderUtil.childNode); 
-                }
-                */
     
                 //check setInnerHTML argument
                 if(setInnerHTML) {
@@ -105,8 +90,6 @@ export class EvaDOMBuilderUtil {
         this.childNodeConsecutiveNum = 0;
 
         for(let i = this.childNodeConsecutiveNum; i < repeatCount; i++) {
-            console.log(this.childNodeConsecutiveNum++);
-            
             if(addConsectiveNumber == false) {
                 EvaDOMBuilderUtil.childNode = document.createElement(nodeType);
     
@@ -146,13 +129,10 @@ export class EvaDOMBuilderUtil {
         stringArray: string[],
         addRef: boolean
         ) {    
-        //EvaDOMBuilderUtil.childNode = document.createElement(nodeType);
 
         //check stringArray argument
         if(stringArray) {
             stringArray.forEach((elements) => {
-                console.log(elements);
-                
                 EvaDOMBuilderUtil.childNode = document.createElement(nodeType);
                 EvaDOMBuilderUtil.childNode.setAttribute(attributeType, attributeName);
 
@@ -188,9 +168,7 @@ export class EvaDOMBuilderUtil {
         //assign childNOdeConsecutiveNum 
         this.childNodeConsecutiveNum = 0;
 
-        for(let i = this.childNodeConsecutiveNum; i < repeatCount; i++) {
-            console.log(this.childNodeConsecutiveNum++);
-            
+        for(let i = this.childNodeConsecutiveNum; i < repeatCount; i++) {    
             if(addConsectiveNumber == false && tempRef === true) {
                 EvaDOMBuilderUtil.childNode = document.createElement(nodeType);
                 EvaDOMBuilderUtil.childNode.setAttribute(attributeType, attributeName);
@@ -229,7 +207,6 @@ export class EvaDOMBuilderUtil {
     //dom builder child with reference and no attributes
     public DOMBuilderChildWithRefNoAttr(
         nodeType: keyof HTMLElementTagNameMap, 
-        //setTextContent: string | undefined, 
         setInnerHTML: string | undefined,
         appendToNode: Node,
         repeatCount: number,
@@ -241,8 +218,6 @@ export class EvaDOMBuilderUtil {
         this.childNodeConsecutiveNum = 0;
 
         for(let i = this.childNodeConsecutiveNum; i < repeatCount; i++) {
-            console.log(this.childNodeConsecutiveNum++);
-                    
             if(addConsectiveNumber == false && tempRef === true) {
                 EvaDOMBuilderUtil.childNode = document.createElement(nodeType);
             
@@ -252,10 +227,8 @@ export class EvaDOMBuilderUtil {
                 //temp ref child
                 EvaDOMBuilderUtil.childNodeTempRef = EvaDOMBuilderUtil.childNode;
 
-                console.log(EvaDOMBuilderUtil.childNodeTempRef);
-
             //check setInnerHTML argument
-             if(setInnerHTML) {
+            if(setInnerHTML) {
                 EvaDOMBuilderUtil.childNode.innerHTML = setInnerHTML;
                 appendToNode.appendChild(EvaDOMBuilderUtil.childNode);
             } else if(setInnerHTML === undefined) {
